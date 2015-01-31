@@ -347,6 +347,8 @@ set completeopt-=preview
 set history=700
 set nu
 set numberwidth=1
+syntax enable
+syntax on
 
 cd %:p:h
 set path=./**
