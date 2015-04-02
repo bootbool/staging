@@ -243,6 +243,14 @@ imap <A-k> <up>
 imap <A-l> <Right>
 imap <A-h> <Left>
 
+" Mapping movement key to go through wrapped line
+nnoremap <Down> gj
+nnoremap <Up> gk
+vnoremap <Down> gj
+vnoremap <Up> gk
+inoremap <Down> <C-o>gj
+inoremap <Up> <C-o>gk
+
 " Copy/Paste
 vmap <C-c> "+y
 imap <C-v> <ESC>"+gp
