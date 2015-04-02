@@ -382,6 +382,7 @@ highlight MyHighlight3 guibg=DarkCyan guifg=lightgrey term=bold gui=bold,undercu
 
 au VimEnter [Mm]akefile,*.c,*.h  call s:MyProjectLoad()
 autocmd BufWritePost *.cpp,*.h,*.c call s:UpdateTags()
+autocmd Filetype gitcommit setlocal spell textwidth=72
 
 " GUI setting
 "Toggle Menu and Toolbar
