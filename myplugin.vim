@@ -363,7 +363,7 @@ set path=./**
 if has('unix')
     set backupdir=/tmp
     set directory=/tmp
-endi
+endif
 
 set wildmenu
 set wildmode=full
