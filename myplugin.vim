@@ -97,6 +97,20 @@ function! MySearch(...)
     if a:0 == 0
         return
     endif
+    if a:1 == 'file'
+        if exists("a:2")
+            let l:s = input('File: ', a:2)
+        else
+            let l:s = input('File: ')
+        endif
+        if l:s == '' || l:s == '/'
+            call feedkeys("\<ESC>:MPL\<CR>\<ESC>:cs f g main\<CR>", "t")
+            return
+        endif
+        let l:s = substitute(l:s, " ", "*", "g")
+        call feedkeys("\<ESC>:e **/*" . l:s . "*\<TAB>", "t")
+        return
+    endif
     if a:1 == 'tag'
         if exists("a:2")
             let l:s = '/' . input('ltag /', a:2)
@@ -298,7 +312,7 @@ vmap #1 <ESC>:help <C-R>*<CR>
 map <C-F1> <ESC>:help <C-R>=expand("<cword>")<CR><CR>
 map <S-F1> <ESC>:help <C-R>=expand("<cword>")<CR><CR>
 
-map #2 <ESC>:MPL<CR><ESC>:cs f g main<CR>
+nmap #2 <ESC>:call MySearch('file')<CR>
 nmap <S-F2> :call SwitchSourceHeader()<CR>
 nmap <C-F2> <ESC>:call MySearch('cscope-f')<CR>
 vmap <C-F2> <ESC>:call MySearch('cscope-f', '<C-R>*')<CR>
