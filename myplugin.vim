@@ -369,6 +369,7 @@ set completeopt-=preview
 set history=700
 set nu
 set numberwidth=1
+set scrolloff=3
 syntax enable
 syntax on
 
