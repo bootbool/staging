@@ -335,10 +335,10 @@ vmap <S-F4> <ESC>:call MySearch('cscope-e', '<C-R>*')<CR>
 
 
 "map <C-F5> <ESC>mA:echo "'A Mark line:" . <C-R>=line('.')<CR><CR>
-map #5 <ESC>'A
-map <C-F5> <ESC>'B
-map <S-F5> <ESC>'B
-map <A-F5> <ESC>'B
+nmap #5 <ESC>:echo "Goto mark 'A'"<CR>`A
+nmap <C-F5> <ESC>:echo "Goto mark 'B'"<CR>`B
+nmap <S-F5> <ESC>:echo "Goto mark 'B'"<CR>`B
+nmap <A-F5> <ESC>:echo "Goto mark 'B'"<CR>`B
 
 map #7 <ESC>:call MyHighlight('1')<CR>
 nmap <S-F7> <ESC>:call MyHighlight('2')<CR>
