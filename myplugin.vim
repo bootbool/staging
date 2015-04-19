@@ -264,6 +264,8 @@ vnoremap <Down> gj
 vnoremap <Up> gk
 inoremap <Down> <C-o>gj
 inoremap <Up> <C-o>gk
+nnoremap B ^
+nnoremap E $
 
 " Copy/Paste
 vmap <C-c> "+y
@@ -370,6 +372,8 @@ set history=700
 set nu
 set numberwidth=1
 set scrolloff=3
+set showmatch
+set matchtime=10
 syntax enable
 syntax on
 
