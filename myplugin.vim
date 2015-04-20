@@ -375,6 +375,9 @@ set numberwidth=1
 set scrolloff=3
 set showmatch
 set matchtime=10
+set smartcase
+set smarttab
+set smartindent
 syntax enable
 syntax on
 
