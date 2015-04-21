@@ -104,7 +104,13 @@ function! MySearch(...)
             let l:s = input('File: ')
         endif
         if l:s == '' || l:s == '/'
-            call feedkeys("\<ESC>:MPL\<CR>\<ESC>:cs f g main\<CR>", "t")
+            redraw
+            let l:result = inputlist(['Goto main()?:', 'Press Num key(Yes)', 'Press Enter/Esc(No)'])
+            if l:result == '0'
+                return
+            else
+                call feedkeys("\<ESC>:MPL\<CR>\<ESC>:cs f g main\<CR>", "t")
+            endif
             return
         endif
         let l:s = substitute(l:s, " ", "*", "g")
