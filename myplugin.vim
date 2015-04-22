@@ -305,8 +305,8 @@ map <3-MiddleMouse> <Nop>
 imap <3-MiddleMouse> <Nop>
 map <4-MiddleMouse> <Nop>
 imap <4-MiddleMouse> <Nop>
-nnoremap <silent> <S-MiddleMouse> <ESC><LeftMouse>:exe 'highlight CSMiddleClick ctermbg=green guibg=green<bar>3match CSMiddleClick /\V\<'.escape(expand('<cword>'), '\').'\>/'<cr>viw
-nnoremap <silent> <C-MiddleMouse> <ESC><LeftMouse>:exe 'highlight CSMiddleClick ctermbg=green guibg=green<bar>3match CSMiddleClick /\V\<'.escape(expand('<cword>'), '\').'\>/'<cr>
+nnoremap <silent> <S-MiddleMouse> <ESC><LeftMouse>:exe 'highlight CSMiddleClick ctermbg=green guifg=white guibg=green<bar>3match CSMiddleClick /\V\<'.escape(expand('<cword>'), '\').'\>/'<cr>viw
+nnoremap <silent> <C-MiddleMouse> <ESC><LeftMouse>:exe 'highlight CSMiddleClick ctermbg=green guifg=white guibg=green<bar>3match CSMiddleClick /\V\<'.escape(expand('<cword>'), '\').'\>/'<cr>
 
 map <S-LeftMouse> <ESC><C-o>
 map <S-RightMouse> <ESC><C-i>
