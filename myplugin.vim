@@ -278,6 +278,8 @@ vmap <C-c> "+y
 imap <C-v> <ESC>"+gp
 cmap <C-v> <C-r>+
 xnoremap p "_dP
+nnoremap <leader>p "0p
+nnoremap <leader>P "0P
 
 nmap K a_<Esc>r
 nmap gdd :let @/='\<'.expand("<cword>").'\>'<CR>:set hls<CR>:echo @/<CR>
