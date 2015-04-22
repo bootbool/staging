@@ -355,7 +355,7 @@ vmap <S-F7> <ESC>:call MyHighlight('2', '<C-R>*')<CR>
 vmap <C-F7> <ESC>:call MyHighlight('3', '<C-R>*')<CR>
 vmap <A-F7> <ESC>:call MyHighlight('2', '<C-R>*')<CR>
 
-map <F10> <ESC>:make<CR>
+map <F10> <ESC>:silent make<CR><ESC>:copen<CR>/error<CR>
 
 "Plugins setting
 let Tlist_Use_Right_Window = 1
