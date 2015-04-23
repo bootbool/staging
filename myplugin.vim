@@ -270,6 +270,8 @@ vnoremap <Down> gj
 vnoremap <Up> gk
 inoremap <Down> <C-o>gj
 inoremap <Up> <C-o>gk
+inoremap <expr> <down> ((pumvisible())?("\<C-n>"):("\<down>"))
+inoremap <expr> <up> ((pumvisible())?("\<C-p>"):("\<up>"))
 nnoremap B ^
 nnoremap E $
 
