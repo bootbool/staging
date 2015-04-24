@@ -375,7 +375,7 @@ set incsearch
 set ignorecase
 filetype plugin on 
 set cscopequickfix=s-,c-,d-,i-,t-,e-,g-,f- 
-"set completeopt-=preview
+set completeopt-=preview
 set complete-=i
 set history=700
 set nu
