@@ -3,7 +3,7 @@ command  -nargs=* MyProjectLoad call s:MyProjectLoad(<f-args>)
 command  -nargs=* MyConfig call s:MyConfig(<f-args>)
 command  -nargs=* MPL call s:MyProjectLoad(<f-args>)
 command  -nargs=* MPC call s:MyProjectCreat(<f-args>)
-
+command  -nargs=* MyCountMatch call s:MyCountMatch(<f-args>)
 
 function s:MyProjectLoad(...)
     set tags=tags
@@ -247,6 +247,21 @@ function! SwitchSourceHeader()
   else
     find %:t:r.c
   endif
+endfunction
+
+function s:MyCountMatch(...)
+    if a:0 == 0
+        let pats=input('Search Pattern: ')
+    elseif a:0 != 0
+        let pats=a:1
+    endif
+    if pats==''
+        echo "Cancel count match!"
+        return
+    endif
+    execute 'let i=1 | g/' . pats . '\zs/s//\=i/ | let i=i+1'
+    execute '%s/' . pats . '/& /'
+    return
 endfunction
 
 " Mapping key for move cursor around windows
