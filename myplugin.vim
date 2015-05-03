@@ -32,10 +32,14 @@ function s:MyProjectCreat(...)
 endfunction
 
 function s:MyProjectCreatTag(...)
+    if has('windows')
+        silent !ctags -R --langmap=c:.c.h.C.H --fields=+iamS --extra=+q .
+        return
+    endif
     silent !ctags -R --langmap=c:.c.h.C.H --c-kinds=-p --c++-kinds=-p --fields=+iamS --extra=+q .
     silent !ctags -R --langmap=c:.c.h.C.H --c-kinds=p --c++-kinds=p --fields=+iamS --extra=+q  -f tags1  . 
     silent !grep -v ^\!_TAG_ tags1 >>tags
-    silent !rm tags1
+    call delete("tags1")
 endfunction
 
 function! s:UpdateTags()
@@ -43,6 +47,19 @@ function! s:UpdateTags()
         return 
     endif
     let f = expand("%:.")
+    if ! has('unix')
+        redraw
+        echo "Updating tags..."
+        silent !ctags -R --langmap=c:.c.h.C.H --fields=+iamS --extra=+q --append=yes f 
+        redraw
+        echo "Updating cscope..."
+        silent !cscope -Rbkq
+        cs reset
+        redraw
+        echo "Updating done!"
+        redraw
+        return
+    endif
     let cwd = getcwd()
     let cmd = "awk \'$2!=\"" . expand("%") . "\"\' tags > tags1"
     let resp = system(cmd)
