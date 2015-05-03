@@ -46,17 +46,27 @@ function! s:UpdateTags()
     let cwd = getcwd()
     let cmd = "awk \'$2!=\"" . expand("%") . "\"\' tags > tags1"
     let resp = system(cmd)
-    silent !mv -f tags1 tags
+    call delete("tags")
+    call rename("tags1", "tags")
     let tagfilename1 = cwd . "/tags1"
     let tagfilename2 = cwd . "/tags2"
     let cmd1 = 'ctags  -f ' . tagfilename1 . ' --langmap=c:.c.h.C.H --c-kinds=-p --c++-kinds=-p --fields=+iaS --extra=+q ' . '"' . f . '"'
     let cmd2 = 'ctags  -f ' . tagfilename2 . ' --langmap=c:.c.h.C.H --c-kinds=p --c++-kinds=p --fields=+iaS --extra=+q ' . '"' . f . '"'
+    redraw
+    echo "Updating tags..."
     let resp = system(cmd1)
     let resp = system(cmd2)
     silent !grep -v ^\!_TAG_ tags1 >>tags
     silent !grep -v ^\!_TAG_ tags2 >>tags
-    silent !rm tags1
-    silent !rm tags2
+    call delete("tags1")
+    call delete("tags2")
+    redraw
+    echo "Updating cscope..."
+    silent !cscope -Rbkq
+    cs reset
+    redraw
+    echo "Updating done!"
+    redraw
 endfunction
 
 function! s:MyProject( ... )
