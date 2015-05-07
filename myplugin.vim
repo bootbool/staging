@@ -310,10 +310,8 @@ nnoremap <Down> gj
 nnoremap <Up> gk
 vnoremap <Down> gj
 vnoremap <Up> gk
-inoremap <Down> <C-o>gj
-inoremap <Up> <C-o>gk
-inoremap <expr> <down> ((pumvisible())?("\<C-n>"):("\<down>"))
-inoremap <expr> <up> ((pumvisible())?("\<C-p>"):("\<up>"))
+inoremap <expr> <down> ((pumvisible())?("\<C-n>"):("\<C-o>g\<down>"))
+inoremap <expr> <up> ((pumvisible())?("\<C-p>"):("\<C-o>g\<up>"))
 nnoremap B ^
 nnoremap E $
 
