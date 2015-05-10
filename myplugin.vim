@@ -341,7 +341,9 @@ nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
-nnoremap <silent> <MiddleMouse> <ESC><LeftMouse>:exe 'echo "2match"<bar>3match MyHighlight3 /\V\<'.escape(expand('<cword>'), '\').'\>/'<cr>
+nnoremap <silent> <MiddleMouse> <ESC><LeftMouse>:exe 'echo "3match"<bar>3match MyHighlight3 /\V\<'.escape(expand('<cword>'), '\').'\>/'<cr>
+inoremap <silent> <MiddleMouse> <ESC><LeftMouse>:exe 'echo "3match"<bar>3match MyHighlight3 /\V\<'.escape(expand('<cword>'), '\').'\>/'<cr>
+vnoremap <silent>  <MiddleMouse> <ESC><LeftMouse>:exe 'echo "3match"<bar>3match MyHighlight3 /\V'.escape("<C-R>*", '\').'/'<cr>
 map <2-MiddleMouse> <Nop>
 imap <2-MiddleMouse> <Nop>
 map <3-MiddleMouse> <Nop>
@@ -350,6 +352,10 @@ map <4-MiddleMouse> <Nop>
 imap <4-MiddleMouse> <Nop>
 nnoremap <silent> <S-MiddleMouse> <ESC><LeftMouse>:exe 'echo "2match"<bar>2match MyHighlight2 /\V\<'.escape(expand('<cword>'), '\').'\>/'<cr>viw
 nnoremap <silent> <C-MiddleMouse> <ESC><LeftMouse>:exe 'echo "2match"<bar>2match MyHighlight2 /\V\<'.escape(expand('<cword>'), '\').'\>/'<cr>
+inoremap <silent> <S-MiddleMouse> <ESC><LeftMouse>:exe 'echo "2match"<bar>2match MyHighlight2 /\V\<'.escape(expand('<cword>'), '\').'\>/'<cr>viw
+inoremap <silent> <C-MiddleMouse> <ESC><LeftMouse>:exe 'echo "2match"<bar>2match MyHighlight2 /\V\<'.escape(expand('<cword>'), '\').'\>/'<cr>
+vnoremap <silent>  <S-MiddleMouse> <ESC><LeftMouse>:exe 'echo "2match"<bar>2match MyHighlight2 /\V'.escape("<C-R>*", '\').'/'<cr>
+vnoremap <silent>  <C-MiddleMouse> <ESC><LeftMouse>:exe 'echo "2match"<bar>2match MyHighlight2 /\V'.escape("<C-R>*", '\').'/'<cr>
 
 map <S-LeftMouse> <ESC><C-o>
 map <S-RightMouse> <ESC><C-i>
