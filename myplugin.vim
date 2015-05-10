@@ -344,8 +344,8 @@ nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 nnoremap <silent> <MiddleMouse> <ESC><LeftMouse>:exe 'echo "3match"<bar>3match MyHighlight3 /\V\<'.escape(expand('<cword>'), '\').'\>/'<cr>
 inoremap <silent> <MiddleMouse> <ESC><LeftMouse>:exe 'echo "3match"<bar>3match MyHighlight3 /\V\<'.escape(expand('<cword>'), '\').'\>/'<cr>
 vnoremap <silent>  <MiddleMouse> <ESC><LeftMouse>:exe 'echo "3match"<bar>3match MyHighlight3 /\V'.escape("<C-R>*", '\').'/'<cr>
-map <2-MiddleMouse> <Nop>
-imap <2-MiddleMouse> <Nop>
+map <2-MiddleMouse> mA
+imap <2-MiddleMouse> <ESC>mA
 map <3-MiddleMouse> <Nop>
 imap <3-MiddleMouse> <Nop>
 map <4-MiddleMouse> <Nop>
