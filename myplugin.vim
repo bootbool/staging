@@ -255,6 +255,8 @@ function s:MyCountMatch(...)
     return
 endfunction
 
+autocmd Filetype * mapclear <buffer> 
+
 " Mapping key for move cursor around windows
 nmap <C-j><C-j> <C-W>j
 nmap <C-k><C-k> <C-W>k
