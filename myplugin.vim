@@ -32,51 +32,15 @@ function s:MyProjectCreat(...)
 endfunction
 
 function s:MyProjectCreatTag(...)
-    if has('windows')
-        silent !ctags -R --langmap=c:.c.h.C.H --fields=+iamS --extra=+q .
-        return
-    endif
-    silent !ctags -R --langmap=c:.c.h.C.H --c-kinds=-p --c++-kinds=-p --fields=+iamS --extra=+q .
-    silent !ctags -R --langmap=c:.c.h.C.H --c-kinds=p --c++-kinds=p --fields=+iamS --extra=+q  -f tags1  . 
-    silent !grep -v ^\!_TAG_ tags1 >>tags
-    call delete("tags1")
+    silent !ctags -R --langmap=c:+.c.h.C.H --c-kinds=+p --c++-kinds=+p --fields=+iamS --extra=+q .
 endfunction
 
 function! s:UpdateTags()
     if !filereadable("tags")
         return 
     endif
-    let f = expand("%:.")
-    if ! has('unix')
-        redraw
-        echo "Updating tags..."
-        silent !ctags -R --langmap=c:.c.h.C.H --fields=+iamS --extra=+q --append=yes f 
-        redraw
-        echo "Updating cscope..."
-        silent !cscope -Rbkq
-        cs reset
-        redraw
-        echo "Updating done!"
-        redraw
-        return
-    endif
-    let cwd = getcwd()
-    let cmd = "awk \'$2!=\"" . expand("%") . "\"\' tags > tags1"
-    let resp = system(cmd)
-    call delete("tags")
-    call rename("tags1", "tags")
-    let tagfilename1 = cwd . "/tags1"
-    let tagfilename2 = cwd . "/tags2"
-    let cmd1 = 'ctags  -f ' . tagfilename1 . ' --langmap=c:.c.h.C.H --c-kinds=-p --c++-kinds=-p --fields=+iaS --extra=+q ' . '"' . f . '"'
-    let cmd2 = 'ctags  -f ' . tagfilename2 . ' --langmap=c:.c.h.C.H --c-kinds=p --c++-kinds=p --fields=+iaS --extra=+q ' . '"' . f . '"'
-    redraw
     echo "Updating tags..."
-    let resp = system(cmd1)
-    let resp = system(cmd2)
-    silent !grep -v ^\!_TAG_ tags1 >>tags
-    silent !grep -v ^\!_TAG_ tags2 >>tags
-    call delete("tags1")
-    call delete("tags2")
+    silent !ctags -R --langmap=c:+.c.h.C.H --c-kinds=+p --c++-kinds=+p --fields=+iamS --extra=+q .
     redraw
     echo "Updating cscope..."
     silent !cscope -Rbkq
