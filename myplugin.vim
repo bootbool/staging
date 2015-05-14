@@ -368,6 +368,8 @@ vmap <S-F7> <ESC>:call MyHighlight('2', '<C-R>*')<CR>
 vmap <C-F7> <ESC>:call MyHighlight('3', '<C-R>*')<CR>
 vmap <A-F7> <ESC>:call MyHighlight('2', '<C-R>*')<CR>
 
+map <F9> <ESC>:buffers<CR>:e #
+
 map <F10> <ESC>:silent make<CR><ESC>:copen<CR>/error<CR>
 
 "Plugins setting
