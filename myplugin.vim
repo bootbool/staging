@@ -83,6 +83,22 @@ function s:MyConfig(...)
     "au BufRead * normal zR
 endfunction
 
+function! MyShourtcut(...)
+    echo '1/j: file search, <tag>'
+    echo '2/k: function search, ltag'
+    echo '3/l: regular experession, vimgrep'
+    let l:result = getchar()
+    if nr2char(l:result) == '1' || nr2char(l:result) == 'j'
+        redraw
+        call MySearch('file')
+    elseif nr2char(l:result) == '2' || nr2char(l:result) == 'k'
+        redraw
+        call MySearch('tag')
+    elseif nr2char(l:result) == '3' || nr2char(l:result) == 'l'
+        redraw
+        call MySearch('vimgrep')
+    endif
+endfunction
 
 function! MySearch(...)
     if a:0 == 0
@@ -371,6 +387,8 @@ vmap <A-F7> <ESC>:call MyHighlight('2', '<C-R>*')<CR>
 map <F9> <ESC>:buffers<CR>:e #
 
 map <F10> <ESC>:silent make<CR><ESC>:copen<CR>/error<CR>
+
+map <C-k> :call MyShourtcut()<CR>
 
 "Plugins setting
 let Tlist_Use_Right_Window = 1
