@@ -305,7 +305,8 @@ xnoremap p "_dP
 nnoremap <leader>p "0p
 nnoremap <leader>P "0P
 
-nmap K a_<Esc>r
+nmap <C-k> a_<Esc>r
+map K :call MyShourtcut()<CR>
 nmap gdd :let @/='\<'.expand("<cword>").'\>'<CR>:set hls<CR>:echo @/<CR>
 
 command! -nargs=+ CSf :cs f f <args>
@@ -387,8 +388,6 @@ vmap <A-F7> <ESC>:call MyHighlight('2', '<C-R>*')<CR>
 map <F9> <ESC>:buffers<CR>:e #
 
 map <F10> <ESC>:silent make<CR><ESC>:copen<CR>/error<CR>
-
-map <C-k> :call MyShourtcut()<CR>
 
 "Plugins setting
 let Tlist_Use_Right_Window = 1
