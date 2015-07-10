@@ -305,7 +305,7 @@ xnoremap p "_dP
 nnoremap <leader>p "0p
 nnoremap <leader>P "0P
 
-nmap <C-k> a_<Esc>r
+" nmap <C-k> a_<Esc>r
 map K :call MyShourtcut()<CR>
 nmap gdd :let @/='\<'.expand("<cword>").'\>'<CR>:set hls<CR>:echo @/<CR>
 
