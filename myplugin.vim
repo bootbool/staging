@@ -97,6 +97,9 @@ function! MyShourtcut(...)
     elseif nr2char(l:result) == '3' || nr2char(l:result) == 'l'
         redraw
         call MySearch('vimgrep')
+    else
+        redraw
+        return
     endif
 endfunction
 
