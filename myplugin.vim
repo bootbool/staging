@@ -369,21 +369,20 @@ nmap <S-F4> <ESC>:call MySearch('cscope-e')<CR>
 vmap <C-F4> <ESC>:call MySearch('cscope-e', '<C-R>*')<CR>
 vmap <S-F4> <ESC>:call MySearch('cscope-e', '<C-R>*')<CR>
 
+map #5 <ESC>:call MyHighlight('1')<CR>
+nmap <S-F5> <ESC>:call MyHighlight('2')<CR>
+nmap <C-F5> <ESC>:call MyHighlight('3')<CR>
+nmap <A-F5> <ESC>:call MyHighlight('2')<CR>
+vmap #5 <ESC>:call MyHighlight('1', '<C-R>*')<CR>
+vmap <S-F5> <ESC>:call MyHighlight('2', '<C-R>*')<CR>
+vmap <C-F5> <ESC>:call MyHighlight('3', '<C-R>*')<CR>
+vmap <A-F5> <ESC>:call MyHighlight('2', '<C-R>*')<CR>
 
-"map <C-F5> <ESC>mA:echo "'A Mark line:" . <C-R>=line('.')<CR><CR>
-nmap #5 <ESC>:echo "Goto mark 'A'"<CR>`A
-nmap <C-F5> <ESC>:echo "Goto mark 'B'"<CR>`B
-nmap <S-F5> <ESC>:echo "Goto mark 'B'"<CR>`B
-nmap <A-F5> <ESC>:echo "Goto mark 'B'"<CR>`B
-
-map #7 <ESC>:call MyHighlight('1')<CR>
-nmap <S-F7> <ESC>:call MyHighlight('2')<CR>
-nmap <C-F7> <ESC>:call MyHighlight('3')<CR>
-nmap <A-F7> <ESC>:call MyHighlight('2')<CR>
-vmap #7 <ESC>:call MyHighlight('1', '<C-R>*')<CR>
-vmap <S-F7> <ESC>:call MyHighlight('2', '<C-R>*')<CR>
-vmap <C-F7> <ESC>:call MyHighlight('3', '<C-R>*')<CR>
-vmap <A-F7> <ESC>:call MyHighlight('2', '<C-R>*')<CR>
+"map <C-F6> <ESC>mA:echo "'A Mark line:" . <C-R>=line('.')<CR><CR>
+nmap #6 <ESC>:echo "Goto mark 'A'"<CR>`A
+nmap <C-F6> <ESC>:echo "Goto mark 'B'"<CR>`B
+nmap <S-F6> <ESC>:echo "Goto mark 'B'"<CR>`B
+nmap <A-F6> <ESC>:echo "Goto mark 'B'"<CR>`B
 
 map <F9> <ESC>:buffers<CR>:e #
 
