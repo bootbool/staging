@@ -84,7 +84,7 @@ function s:MyConfig(...)
 endfunction
 
 function! MyShourtcut(...)
-    echo '1/j: file search, <tag>'
+    echo '1/j: file search, <tab>'
     echo '2/k: function search, ltag'
     echo '3/l: regular experession, vimgrep'
     let l:result = getchar()
