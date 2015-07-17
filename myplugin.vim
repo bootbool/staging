@@ -39,6 +39,9 @@ function! s:UpdateTags()
     if !filereadable("tags")
         return 
     endif
+    if g:My_Update_Tags != 1
+        return
+    endif
     echo "Updating tags..."
     silent !ctags -R --langmap=c:+.c.h.C.H --c-kinds=+p --c++-kinds=+p --fields=+iamS --extra=+q .
     redraw
@@ -81,6 +84,10 @@ function s:MyConfig(...)
     set foldmethod=syntax
     set foldlevel=99
     "au BufRead * normal zR
+
+    if !exists('g:My_Update_Tags')
+        let g:My_Update_Tags = 1
+    endif
 endfunction
 
 function! MyShourtcut(...)
