@@ -209,7 +209,13 @@ function! MySearch(...)
             echo "Cancel search!"
             return
         endif
-        execute 'vimgrep /' . l:s . '/g **/*.[Cc]** **/*.[Hh]**'
+        execute 'vimgrep /' . l:s . '/g **/*.[Cc] **/*.[Hh]'
+        if glob('**/*.[CcHh][px+][px+]') != ''
+            execute 'vimgrepadd /' . l:s . '/g **/*.[CcHh][px+][px+]'
+        endif
+        if glob('**/*.[CcHh][px+]') != ''
+            execute 'vimgrepadd /' . l:s . '/g **/*.[CcHh][px+]'
+        endif
         return
     endif
 endfunction
@@ -450,8 +456,8 @@ highlight MyHighlight3 guibg=DarkCyan guifg=lightgrey term=bold gui=bold,undercu
 
 "set lines=40 columns=70
 
-au VimEnter [Mm]akefile,*.[HhCc]** call s:MyProjectLoad()
-autocmd BufWritePost *.[HhCc]** call s:UpdateTags()
+au VimEnter [Mm]akefile,*.[HhCc],*.[CcHh][px+][px+],*.[CcHh][px+] call s:MyProjectLoad()
+autocmd BufWritePost *.[HhCc],*.[CcHh][px+][px+],*.[CcHh][px+] call s:UpdateTags()
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
 " GUI setting
