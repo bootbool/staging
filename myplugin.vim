@@ -122,12 +122,15 @@ function! MySearch(...)
         endif
         if l:s == '' || l:s == '/'
             redraw
-            let l:result = inputlist(['Goto main()?:', 'Press Num key(Yes)', 'Press Enter/Esc(No)'])
-            if l:result == '0'
-                return
-            else
+            echo 'Press alpha/space, go to main()'
+            echo 'Press enter/esc/other, abort! ...'
+            "let l:result = inputlist(['Goto main()?:', 'Press any key(Yes)', 'Press Enter/Esc(No)'])
+            let l:result = getchar()
+            let l:result =nr2char(l:result) 
+            if ( l:result >= 'a' && l:result <= 'z' ) || l:result == ' '
                 call feedkeys("\<ESC>:MPL\<CR>\<ESC>:cs f g main\<CR>", "t")
             endif
+            redraw
             return
         endif
         let l:s = substitute(l:s, " ", "*", "g")
