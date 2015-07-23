@@ -405,7 +405,7 @@ nmap <A-F6> <ESC>:echo "Goto mark 'B'"<CR>`B
 
 map <F9> <ESC>:buffers<CR>:e #
 
-map <F10> <ESC>:silent make<CR><ESC>:copen<CR>/error<CR>
+map <F10> <ESC>:silent make!<CR><ESC>:copen<CR> /error: <CR>
 
 "Plugins setting
 let Tlist_Use_Right_Window = 1
