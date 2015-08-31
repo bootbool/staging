@@ -317,6 +317,9 @@ nnoremap B ^
 nnoremap E $
 
 " Copy/Paste
+unmap <C-c>
+iunmap <C-v>
+unmap <C-v
 vmap <C-c> "+y
 imap <C-v> <ESC>"+gp
 cmap <C-v> <C-r>+
