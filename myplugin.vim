@@ -324,7 +324,7 @@ if ! empty(maparg('<C-v>','i'))
     iunmap <C-v>
 endif
 if ! empty(maparg('<C-v>'))
-    unmap <C-v
+    unmap <C-v>
 endif
 vmap <C-c> "+y
 imap <C-v> <ESC>"+gp
