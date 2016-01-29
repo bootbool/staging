@@ -317,9 +317,15 @@ nnoremap B ^
 nnoremap E $
 
 " Copy/Paste
-unmap <C-c>
-iunmap <C-v>
-unmap <C-v
+if ! empty(maparg('<C-c>'))
+    unmap <C-c>
+endif
+if ! empty(maparg('<C-v>','i'))
+    iunmap <C-v>
+endif
+if ! empty(maparg('<C-v>'))
+    unmap <C-v
+endif
 vmap <C-c> "+y
 imap <C-v> <ESC>"+gp
 cmap <C-v> <C-r>+
