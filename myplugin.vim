@@ -70,14 +70,14 @@ endfunction
 
 function s:MyConfig(...)
     " Mapping cursor for cscope  
-    map <S-up>  <ESC>:cprevious<CR>
-    map <S-down> <ESC>:cnext<CR>
+    map <S-up>  <ESC>:cprevious<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR> 
+    map <S-down> <ESC>:cnext<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
     map <S-left>  <ESC>:col<CR>:cc<CR>
     map <S-right> <ESC>:cnew<CR>:cc<CR>
     
     " Mapping cursor for ctags
-    map <A-up>  <ESC>:tp<CR>
-    map <A-down> <ESC>:tn<CR>
+    map <A-up>  <ESC>:tp<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
+    map <A-down> <ESC>:tn<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
     map <A-left>  <ESC>:po<CR>
     map <A-right> <ESC>:ta<CR>
 
@@ -148,9 +148,11 @@ function! MySearch(...)
             return
         endif
         let l:s = substitute(l:s, " ", ".*", "g")
+        let @h = substitute(l:s, "/", "", "")
         execute 'ltag ' . l:s
         redraw
         echo "ltag " . l:s
+        execute '2match MyHighlight2 /\c' . @h . '/'
         return
     endif
     if a:1 == 'cscope-f'
@@ -187,6 +189,8 @@ function! MySearch(...)
         else
             execute 'cs f g .*' . l:s . '.*'
         endif
+        let @h=l:s
+        execute '2match MyHighlight2 /\c' . l:s . '/'
         return
     endif
     if a:1 == 'cscope-e'
@@ -200,6 +204,8 @@ function! MySearch(...)
             return
         endif
         execute 'cs f e ' . l:s
+        let @h=l:s
+        execute '2match MyHighlight2 /\c' . l:s . '/'
         return
     endif
     if a:1 == 'vimgrep'
@@ -219,6 +225,8 @@ function! MySearch(...)
         if glob('**/*.[CcHh][px+]') != ''
             execute 'vimgrepadd /' . l:s . '/g **/*.[CcHh][px+]'
         endif
+        let @h=l:s
+        execute '2match MyHighlight2 /\c' . l:s . '/'
         return
     endif
 endfunction
