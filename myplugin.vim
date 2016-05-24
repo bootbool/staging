@@ -298,7 +298,7 @@ function s:MyCountMatch(...)
     return
 endfunction
 
-autocmd Filetype * mapclear <buffer> 
+autocmd Filetype [Mm]akefile,*.[HhCc],*.[CcHh][px+][px+],*.[CcHh][px+] mapclear <buffer> 
 
 " Mapping key for move cursor around windows
 nmap <C-j><C-j> <C-W>j
