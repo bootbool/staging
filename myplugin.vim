@@ -43,7 +43,7 @@ function! s:UpdateTags()
         return
     endif
     echo "Updating tags..."
-    call s:MyProjectCreatTag()
+    silent !ctags --langmap=c:+.c.h.C.H --c-kinds=+p --c++-kinds=+p --fields=+iamS --extra=+q -a %
     redraw
     echo "Updating cscope..."
     silent !cscope -Rbkq
