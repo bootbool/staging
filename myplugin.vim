@@ -352,10 +352,10 @@ command! -nargs=+ CSt :cs f t <args>
 command! -nargs=+ CSc :cs f c <args>
 
 nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>g :cs find g <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>g :let @h="<C-R>=expand("<cword>")<CR>"<CR>:cs find g <C-R>h<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
 nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>e :cs find e <C-R>=expand("<cword>")<CR><CR>
+nmap <C-\>e :let @h="<C-R>=expand("<cword>")<CR>"<CR>:cs find e <C-R>h<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
 nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
@@ -375,6 +375,8 @@ inoremap <silent> <S-MiddleMouse> <ESC><LeftMouse>:exe 'echo "3match"<bar>3match
 inoremap <silent> <C-MiddleMouse> <ESC><LeftMouse>:exe 'echo "3match"<bar>3match MyHighlight3 /\V\<'.escape(expand('<cword>'), '\').'\>/'<cr>
 vnoremap <silent> <S-MiddleMouse> <ESC><LeftMouse>:exe 'echo "3match"<bar>3match MyHighlight3 /\V'.escape("<C-R>*", '\').'/'<cr>
 vnoremap <silent> <C-MiddleMouse> <ESC><LeftMouse>:exe 'echo "3match"<bar>3match MyHighlight3 /\V'.escape("<C-R>*", '\').'/'<cr>
+
+nmap <silent> <C-LeftMouse> <LeftMouse>:let g:HighlightVar2="<C-R>=expand("<cword>")<CR>"<CR><C-]>:exe '2match MyHighlight2 /' . g:HighlightVar2 . '/'<CR>
 
 map <S-LeftMouse> <ESC><C-o>
 map <S-RightMouse> <ESC><C-i>
