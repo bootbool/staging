@@ -218,7 +218,9 @@ function! MySearch(...)
             echo "Cancel search!"
             return
         endif
-        execute 'vimgrep /' . l:s . '/g **/*.[Cc] **/*.[Hh]'
+        if glob('**/*.[CcHh]') != ''
+            execute 'vimgrep /' . l:s . '/g **/*.[Cc] **/*.[Hh]'
+        endif
         if glob('**/*.[CcHh][px+][px+]') != ''
             execute 'vimgrepadd /' . l:s . '/g **/*.[CcHh][px+][px+]'
         endif
