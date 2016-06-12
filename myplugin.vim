@@ -4,6 +4,8 @@ command  -nargs=* MyConfig call s:MyConfig(<f-args>)
 command  -nargs=* MPL call s:MyProjectLoad(<f-args>)
 command  -nargs=* MPC call s:MyProjectCreat(<f-args>)
 command  -nargs=* MyCountMatch call s:MyCountMatch(<f-args>)
+let g:MySearchList = []
+let g:MySearchListPointer = 0
 
 function s:MyProjectLoad(...)
     set tags=tags
@@ -72,14 +74,17 @@ function s:MyConfig(...)
     " Mapping cursor for cscope  
     map <S-up>  <ESC>:cprevious<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR> 
     map <S-down> <ESC>:cnext<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
-    map <S-left>  <ESC>:col<CR>:cc<CR>
-    map <S-right> <ESC>:cnew<CR>:cc<CR>
+    map <S-left>  <ESC>:col<CR>:cc<CR>:let @h=MySearchManage("back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
+    map <S-right> <ESC>:cnew<CR>:cc<CR>:let @h=MySearchManage("forward")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
     
     " Mapping cursor for ctags
     map <A-up>  <ESC>:tp<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
     map <A-down> <ESC>:tn<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
-    map <A-left>  <ESC>:po<CR>
-    map <A-right> <ESC>:ta<CR>
+    map <A-left>  <ESC>:po<CR>:let @h=MySearchManage("back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
+    map <A-right> <ESC>:ta<CR>:let @h=MySearchManage("forward")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
+
+    nmap <silent> <C-LeftMouse> <LeftMouse>:let @h ="<C-R>=expand("<cword>")<CR>"<CR><C-]>:call MySearchManage("add", @h)<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
+    nmap <silent> <C-t> <ESC>:po<CR>:let @h=MySearchManage("back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
 
     set foldmethod=syntax
     set foldlevel=99
@@ -153,6 +158,7 @@ function! MySearch(...)
         redraw
         echo "ltag " . l:s
         execute '2match MyHighlight2 /\c' . @h . '/'
+        call MySearchManage( "add", @h )
         return
     endif
     if a:1 == 'cscope-f'
@@ -191,6 +197,7 @@ function! MySearch(...)
         endif
         let @h=l:s
         execute '2match MyHighlight2 /\c' . l:s . '/'
+        call MySearchManage( "add", @h )
         return
     endif
     if a:1 == 'cscope-e'
@@ -229,6 +236,7 @@ function! MySearch(...)
         endif
         let @h=l:s
         execute '2match MyHighlight2 /\c' . l:s . '/'
+        call MySearchManage( "add", @h )
         return
     endif
 endfunction
@@ -300,6 +308,33 @@ function s:MyCountMatch(...)
     return
 endfunction
 
+function MySearchManage(...)
+    if a:1 == "add"
+        if g:MySearchListPointer >= len( g:MySearchList )
+            call add( g:MySearchList, a:2 )
+        else
+            let g:MySearchList[ g:MySearchListPointer ] = a:2
+        endif
+        let g:MySearchListPointer = g:MySearchListPointer + 1
+    elseif a:1 == "back"
+        if g:MySearchListPointer > 0
+            let g:MySearchListPointer = g:MySearchListPointer - 1
+        endif
+        if g:MySearchListPointer == 0
+            return g:MySearchList[ 0 ]
+        endif
+        return g:MySearchList[ g:MySearchListPointer - 1 ]
+    elseif a:1 == "forward"
+        let g:MySearchListPointer = g:MySearchListPointer + 1
+        return g:MySearchList[ g:MySearchListPointer - 1 ]
+    elseif a:1 == "get"
+        if g:MySearchListPointer == 0
+            return g:MySearchList[ 0 ]
+        endif
+        return g:MySearchList[ g:MySearchListPointer - 1 ]
+    endif
+endfunction
+
 autocmd Filetype [Mm]akefile,*.[HhCc],*.[CcHh][px+][px+],*.[CcHh][px+] mapclear <buffer> 
 
 " Mapping key for move cursor around windows
@@ -354,10 +389,10 @@ command! -nargs=+ CSt :cs f t <args>
 command! -nargs=+ CSc :cs f c <args>
 
 nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>g :let @h="<C-R>=expand("<cword>")<CR>"<CR>:cs find g <C-R>h<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
+nmap <C-\>g :let @h="<C-R>=expand("<cword>")<CR>"<CR>:call MySearchManage("add", @h)<CR>:cs find g <C-R>h<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
 nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>e :let @h="<C-R>=expand("<cword>")<CR>"<CR>:cs find e <C-R>h<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
+nmap <C-\>e :let @h="<C-R>=expand("<cword>")<CR>"<CR>:call MySearchManage("add", @h)<CR>:cs find e <C-R>h<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
 nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
@@ -377,8 +412,6 @@ inoremap <silent> <S-MiddleMouse> <ESC><LeftMouse>:exe 'echo "3match"<bar>3match
 inoremap <silent> <C-MiddleMouse> <ESC><LeftMouse>:exe 'echo "3match"<bar>3match MyHighlight3 /\V\<'.escape(expand('<cword>'), '\').'\>/'<cr>
 vnoremap <silent> <S-MiddleMouse> <ESC><LeftMouse>:exe 'echo "3match"<bar>3match MyHighlight3 /\V'.escape("<C-R>*", '\').'/'<cr>
 vnoremap <silent> <C-MiddleMouse> <ESC><LeftMouse>:exe 'echo "3match"<bar>3match MyHighlight3 /\V'.escape("<C-R>*", '\').'/'<cr>
-
-nmap <silent> <C-LeftMouse> <LeftMouse>:let g:HighlightVar2="<C-R>=expand("<cword>")<CR>"<CR><C-]>:exe '2match MyHighlight2 /' . g:HighlightVar2 . '/'<CR>
 
 map <S-LeftMouse> <ESC><C-o>
 map <S-RightMouse> <ESC><C-i>
