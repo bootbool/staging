@@ -29,7 +29,8 @@ function s:MyProjectCreat(...)
     echo "Generating tag file..."
     call s:MyProjectCreatTag()
     echo "Generating cscope file..."
-    silent !cscope -Rbkq
+    silent !cscope -Rbk
+"   silent !cscope -Rbkq
     redraw
 endfunction
 
@@ -48,7 +49,7 @@ function! s:UpdateTags()
     silent !ctags --langmap=c:+.c.h.C.H --c-kinds=+p --c++-kinds=+p --fields=+iamS --extra=+q -a %
     redraw
     echo "Updating cscope..."
-    silent !cscope -Rbkq
+    silent !cscope -Rbk
     cs reset
     redraw
     echo "Updating done!"
