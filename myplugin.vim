@@ -483,7 +483,7 @@ set complete-=i
 set history=700
 set nu
 set numberwidth=1
-set scrolloff=3
+set scrolloff=1
 set showmatch
 set matchtime=10
 set smartcase
