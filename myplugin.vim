@@ -6,6 +6,7 @@ command  -nargs=* MPC call s:MyProjectCreat(<f-args>)
 command  -nargs=* MyCountMatch call s:MyCountMatch(<f-args>)
 let g:MySearchList = []
 let g:MySearchListPointer = 0
+let g:MyModifyList = []
 
 function s:MyProjectLoad(...)
     set tags=tags
@@ -29,8 +30,8 @@ function s:MyProjectCreat(...)
     echo "Generating tag file..."
     call s:MyProjectCreatTag()
     echo "Generating cscope file..."
-    silent !cscope -Rbk
 "   silent !cscope -Rbkq
+    silent !cscope -Rbk
     redraw
 endfunction
 
@@ -43,6 +44,10 @@ function! s:UpdateTags()
         return 
     endif
     if g:My_Update_Tags != 1
+        call add(g:MyModifyList, expand('%'))
+        call uniq(sort(g:MyModifyList))
+        echo "Record to MyModifyList!"
+        redraw
         return
     endif
     echo "Updating tags..."
@@ -54,6 +59,27 @@ function! s:UpdateTags()
     redraw
     echo "Updating done!"
     redraw
+endfunction
+
+function! s:UpdateTagsLeave()
+    if !filereadable("tags")
+        return 
+    endif
+    if g:My_Update_Tags != 1
+        if len(g:MyModifyList) == 0
+            return
+        endif
+        let filelists = join(g:MyModifyList, ' ')
+        echo "Updating tags..."
+        silent exe '!ctags --langmap=c:+.c.h.C.H --c-kinds=+p --c++-kinds=+p --fields=+iamS --extra=+q -a ' . filelists
+        redraw
+        echo "Updating cscope..."
+        silent !cscope -Rbk
+        redraw
+        echo "Updating done!"
+        redraw
+        return
+    endif
 endfunction
 
 function! s:MyProject( ... )
@@ -77,6 +103,7 @@ function s:MyConfig(...)
     map <S-down> <ESC>:cnext<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
     map <S-left>  <ESC>:col<CR>:cc<CR>:let @h=MySearchManage("back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
     map <S-right> <ESC>:cnew<CR>:cc<CR>:let @h=MySearchManage("forward")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
+
     
     " Mapping cursor for ctags
     map <A-up>  <ESC>:tp<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
@@ -92,7 +119,7 @@ function s:MyConfig(...)
     "au BufRead * normal zR
 
     if !exists('g:My_Update_Tags')
-        let g:My_Update_Tags = 1
+        let g:My_Update_Tags = 0
     endif
 endfunction
 
@@ -483,7 +510,7 @@ set complete-=i
 set history=700
 set nu
 set numberwidth=1
-set scrolloff=1
+set scrolloff=2
 set showmatch
 set matchtime=10
 set smartcase
@@ -516,6 +543,7 @@ highlight MyHighlight3 guibg=DarkCyan guifg=lightgrey term=bold gui=bold,undercu
 
 au VimEnter [Mm]akefile,*.[HhCc],*.[CcHh][px+][px+],*.[CcHh][px+] call s:MyProjectLoad()
 autocmd BufWritePost *.[HhCc],*.[CcHh][px+][px+],*.[CcHh][px+] call s:UpdateTags()
+au VimLeave * call s:UpdateTagsLeave()
 autocmd Filetype gitcommit setlocal spell textwidth=72
 
 " GUI setting
