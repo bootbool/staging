@@ -420,7 +420,7 @@ nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>g :let @h="<C-R>=expand("<cword>")<CR>"<CR>:call MySearchManage("add", @h)<CR>:cs find g <C-R>h<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
 nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>e :let @h="<C-R>=expand("<cword>")<CR>"<CR>:call MySearchManage("add", @h)<CR>:cs find e <C-R>h<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
+nmap <C-\>e :let @h="<C-R>=expand("<cword>")<CR>"<CR>:cs find e <C-R>h<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
 nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
 nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
 nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
