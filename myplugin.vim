@@ -7,6 +7,9 @@ command  -nargs=* MyCountMatch call s:MyCountMatch(<f-args>)
 let g:MySearchList = []
 let g:MySearchListPointer = 0
 let g:MyModifyList = []
+if !exists('g:My_Update_Tags')
+    let g:My_Update_Tags = 0
+endif
 
 function s:MyProjectLoad(...)
     set tags=tags
@@ -117,10 +120,6 @@ function s:MyConfig(...)
     set foldmethod=syntax
     set foldlevel=99
     "au BufRead * normal zR
-
-    if !exists('g:My_Update_Tags')
-        let g:My_Update_Tags = 0
-    endif
 endfunction
 
 function! MyShourtcut(...)
