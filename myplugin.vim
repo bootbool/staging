@@ -485,7 +485,11 @@ nmap <C-F6> <ESC>:echo "Goto mark 'B'"<CR>`B
 nmap <S-F6> <ESC>:echo "Goto mark 'B'"<CR>`B
 nmap <A-F6> <ESC>:echo "Goto mark 'B'"<CR>`B
 
+mapclear <buffer>
 map <F9> <ESC>:buffers<CR>:e #
+noremap <buffer> <F9> <ESC>:buffers<CR>:e #
+noremap <buffer> <S-F9> <ESC>:bp<CR>
+noremap <buffer> <C-F9> <ESC>:bn<CR>
 
 map <F10> <ESC>:silent make!<CR><ESC>:copen<CR> /error: <CR>
 
@@ -555,6 +559,8 @@ set guioptions-=T
 set guioptions-=r
 set guioptions-=L
 nmap  <F12> :call MyToggle()<CR>
+nmap  <S-F12> <ESC>:Tlist<CR>
+
 
 function! MyToggle(...)
     if &guioptions =~# 'T'
