@@ -487,9 +487,9 @@ nmap <A-F6> <ESC>:echo "Goto mark 'B'"<CR>`B
 
 mapclear <buffer>
 map <F9> <ESC>:buffers<CR>:e #
-noremap <buffer> <F9> <ESC>:buffers<CR>:e #
-noremap <buffer> <S-F9> <ESC>:bp<CR>
-noremap <buffer> <C-F9> <ESC>:bn<CR>
+noremap <F9> <ESC>:buffers<CR>:e #
+noremap <S-F9> <ESC>:bp<CR>
+noremap <C-F9> <ESC>:bn<CR>
 
 map <F10> <ESC>:silent make!<CR><ESC>:copen<CR> /error: <CR>
 
