@@ -102,20 +102,20 @@ endfunction
 
 function s:MyConfig(...)
     " Mapping cursor for cscope  
-    map <S-up>  <ESC>:cprevious<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR> 
-    map <S-down> <ESC>:cnext<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
-    map <S-left>  <ESC>:col<CR>:cc<CR>:let @h=MySearchManage("back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
-    map <S-right> <ESC>:cnew<CR>:cc<CR>:let @h=MySearchManage("forward")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
+    map <S-up>  <ESC>:cprevious<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
+    map <S-down> <ESC>:cnext<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
+    map <S-left>  <ESC>:col<CR>:cc<CR>:let @h=MySearchManage("back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
+    map <S-right> <ESC>:cnew<CR>:cc<CR>:let @h=MySearchManage("forward")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
 
     
     " Mapping cursor for ctags
-    map <A-up>  <ESC>:tp<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
-    map <A-down> <ESC>:tn<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
-    map <A-left>  <ESC>:po<CR>:let @h=MySearchManage("back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
-    map <A-right> <ESC>:ta<CR>:let @h=MySearchManage("forward")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
+    map <A-up>  <ESC>:tp<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
+    map <A-down> <ESC>:tn<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
+    map <A-left>  <ESC>:po<CR>:let @h=MySearchManage("back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
+    map <A-right> <ESC>:ta<CR>:let @h=MySearchManage("forward")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
 
-    nmap <silent> <C-LeftMouse> <LeftMouse>:let @h ="<C-R>=expand("<cword>")<CR>"<CR><C-]>:call MySearchManage("add", @h)<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
-    nmap <silent> <C-t> <ESC>:po<CR>:let @h=MySearchManage("back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
+    nmap <silent> <C-LeftMouse> <LeftMouse>:let @h ="<C-R>=expand("<cword>")<CR>"<CR><C-]>:call MySearchManage("add", @h)<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
+    nmap <silent> <C-t> <ESC>:po<CR>:let @h=MySearchManage("back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
 
     set foldmethod=syntax
     set foldlevel=99
