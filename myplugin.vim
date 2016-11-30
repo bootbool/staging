@@ -114,6 +114,11 @@ function s:MyConfig(...)
     map <A-left>  <ESC>:po<CR>:let @h=MySearchManage("back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
     map <A-right> <ESC>:ta<CR>:let @h=MySearchManage("forward")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
 
+    map <S-ScrollWheelUp> <S-Up>
+    map <S-ScrollWheelDown> <S-Down>
+    map <A-ScrollWheelUp> <A-Up>
+    map <A-ScrollWheelDown> <A-Down>
+
     nmap <silent> <C-LeftMouse> <LeftMouse>:let @h ="<C-R>=expand("<cword>")<CR>"<CR><C-]>:call MySearchManage("add", @h)<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
     nmap <silent> <C-t> <ESC>:po<CR>:let @h=MySearchManage("back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
 
