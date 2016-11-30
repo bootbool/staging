@@ -560,7 +560,10 @@ set guioptions-=r
 set guioptions-=L
 nmap  <F12> :call MyToggle()<CR>
 nmap  <S-F12> <ESC>:Tlist<CR>
-
+if has("gui_running")
+  " Maximize gvim window.
+  set lines=999 columns=85
+endif
 
 function! MyToggle(...)
     if &guioptions =~# 'T'
