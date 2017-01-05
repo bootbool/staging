@@ -557,7 +557,7 @@ autocmd Filetype gitcommit setlocal spell textwidth=72
 
 " GUI setting
 "Toggle Menu and Toolbar
-set guifont=Monospace\ 12
+set guifont=Monospace\ 11
 set guioptions+=c
 set guioptions-=m
 set guioptions-=T
