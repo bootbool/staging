@@ -17,3 +17,7 @@ export ZIPINFO="-O gb18030"
 
 export PATH=$PATH:/opt/gcc/bin
 
+if [ `pwd` = $HOME ]; 
+then
+    cd $RAMDISK 
+fi
