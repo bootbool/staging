@@ -106,6 +106,8 @@ function s:MyConfig(...)
     map <S-down> <ESC>:cnext<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
     map <S-left>  <ESC>:col<CR>:cc<CR>:let @h=MySearchManage("back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
     map <S-right> <ESC>:cnew<CR>:cc<CR>:let @h=MySearchManage("forward")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
+    map <S-LeftMouse>  <ESC>:col<CR>:cc<CR>:let @h=MySearchManage("back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
+    map <S-RightMouse> <ESC>:cnew<CR>:cc<CR>:let @h=MySearchManage("forward")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
 
     
     " Mapping cursor for ctags
@@ -446,10 +448,10 @@ inoremap <silent> <C-MiddleMouse> <ESC><LeftMouse>:exe 'echo "3match"<bar>3match
 vnoremap <silent> <S-MiddleMouse> <ESC><LeftMouse>:exe 'echo "3match"<bar>3match MyHighlight3 /\V'.escape("<C-R>*", '\').'/'<cr>
 vnoremap <silent> <C-MiddleMouse> <ESC><LeftMouse>:exe 'echo "3match"<bar>3match MyHighlight3 /\V'.escape("<C-R>*", '\').'/'<cr>
 
-map <S-LeftMouse> <ESC><C-o>
-map <S-RightMouse> <ESC><C-i>
-imap <S-LeftMouse> <ESC><C-o>
-imap <S-RightMouse> <ESC><C-i>
+"map <S-LeftMouse> <ESC><C-o>
+"map <S-RightMouse> <ESC><C-i>
+"imap <S-LeftMouse> <ESC><C-o>
+"imap <S-RightMouse> <ESC><C-i>
 
 map #1 <ESC>:help<SPACE>
 vmap #1 <ESC>:help <C-R>*<CR>
