@@ -166,7 +166,7 @@ function! MySearch(...)
             "let l:result = inputlist(['Goto main()?:', 'Press any key(Yes)', 'Press Enter/Esc(No)'])
             let l:result = getchar()
             let l:result =nr2char(l:result) 
-            if ( l:result < 'A' && l:result > 'z' )
+            if ( l:result < 'A' || l:result > 'z' )
                 call feedkeys("\<ESC>:MPL\<CR>\<ESC>:cs f g main\<CR>", "t")
                 call MySearchManage( "add", "main" )
             endif
