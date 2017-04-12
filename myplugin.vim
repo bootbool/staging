@@ -168,6 +168,7 @@ function! MySearch(...)
             let l:result =nr2char(l:result) 
             if ( l:result < 'A' && l:result > 'z' )
                 call feedkeys("\<ESC>:MPL\<CR>\<ESC>:cs f g main\<CR>", "t")
+                call MySearchManage( "add", "main" )
             endif
             redraw
             return
