@@ -425,7 +425,7 @@ command! -nargs=+ CSc :cs f c <args>
 
 nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>g :let @h="<C-R>=expand("<cword>")<CR>"<CR>:call MySearchManage("add", @h)<CR>:cs find g <C-R>h<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
-nmap <silent> <C-RightMouse> <LeftMouse>:let @h ="<C-R>=expand("<cword>")<CR>"<CR>:cs find g <C-R>h<CR>:call MySearchManage("add", @h)<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
+nmap <silent> <C-RightMouse> <LeftMouse>ma:let @h ="<C-R>=expand("<cword>")<CR>"<CR>:cs find g <C-R>h<CR>:call MySearchManage("add", @h)<CR>mb:exe '2match MyHighlight2 /' . @h . '/'<CR>
 nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
 nmap <C-\>e :let @h="<C-R>=expand("<cword>")<CR>"<CR>:cs find e <C-R>h<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
@@ -488,10 +488,10 @@ vmap <C-F5> <ESC>:call MyHighlight('3', '<C-R>*')<CR>
 vmap <A-F5> <ESC>:call MyHighlight('2', '<C-R>*')<CR>
 
 "map <C-F6> <ESC>mA:echo "'A Mark line:" . <C-R>=line('.')<CR><CR>
-nmap #6 <ESC>:echo "Goto mark 'A'"<CR>`A
-nmap <C-F6> <ESC>:echo "Goto mark 'B'"<CR>`B
-nmap <S-F6> <ESC>:echo "Goto mark 'B'"<CR>`B
-nmap <A-F6> <ESC>:echo "Goto mark 'B'"<CR>`B
+nmap #6 <ESC>:echo "Goto mark 'a'"<CR>`a
+nmap <C-F6> <ESC>:echo "Goto mark 'b'"<CR>`b
+nmap <S-F6> <ESC>:echo "Goto mark 'b'"<CR>`b
+nmap <A-F6> <ESC>:echo "Goto mark 'b'"<CR>`b
 
 mapclear <buffer>
 map <F9> <ESC>:buffers<CR>:e #
