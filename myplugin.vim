@@ -106,8 +106,8 @@ function s:MyConfig(...)
     map <S-down> <ESC>:cnext<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
     map <S-left>  <ESC>:col<CR>:cc<CR>:let @h=MySearchManage("back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
     map <S-right> <ESC>:cnew<CR>:cc<CR>:let @h=MySearchManage("forward")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
-    map <S-LeftMouse>  <ESC>:col<CR>:cc<CR>:let @h=MySearchManage("back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
-    map <S-RightMouse> <ESC>:cnew<CR>:cc<CR>:let @h=MySearchManage("forward")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
+    map <S-LeftMouse>  <ESC>mb:col<CR>:cc<CR>:let @h=MySearchManage("back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>'azz
+    map <S-RightMouse> <ESC>mb:cnew<CR>:cc<CR>:let @h=MySearchManage("forward")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>'bzz
 
     
     " Mapping cursor for ctags
@@ -570,7 +570,7 @@ nmap  <F12> :call MyToggle()<CR>
 nmap  <S-F12> <ESC>:Tlist<CR>
 if has("gui_running")
   " Maximize gvim window.
-  set lines=999 columns=85
+  set lines=55 columns=85
 endif
 
 function! MyToggle(...)
