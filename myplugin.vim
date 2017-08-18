@@ -236,11 +236,7 @@ function! MySearch(...)
             return
         endif
         let l:s = substitute(l:s, " ", ".*", "g")
-        if exists("a:2")
-            execute 'cs f g ' . l:s
-        else
-            execute 'cs f g .*' . l:s . '.*'
-        endif
+        execute 'cs f g ' . l:s
         let @h=l:s
         execute '2match MyHighlight2 /\c' . l:s . '/'
         call MyListManage('g:MySearchList', 'g:MySearchListPointer', "add", @h )
