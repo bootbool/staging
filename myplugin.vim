@@ -104,25 +104,34 @@ function s:MyConfig(...)
     " Mapping cursor for cscope  
     map <S-up>  <ESC>:cprevious<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
     map <S-down> <ESC>:cnext<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
-    map <S-left>  <ESC>:col<CR>:cc<CR>:let @h=MySearchManage("back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
-    map <S-right> <ESC>:cnew<CR>:cc<CR>:let @h=MySearchManage("forward")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
-    map <S-LeftMouse>  <ESC>mb:col<CR>:cc<CR>:let @h=MySearchManage("back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>'azz
-    map <S-RightMouse> <ESC>mb:cnew<CR>:cc<CR>:let @h=MySearchManage("forward")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>'bzz
+    map <S-left>  <ESC>:col<CR>:cc<CR>:let @h=MyListManage('g:MySearchList', 'g:MySearchListPointer', "back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
+    map <S-right> <ESC>:cnew<CR>:cc<CR>:let @h=MyListManage('g:MySearchList', 'g:MySearchListPointer',"forward")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
+    map <S-LeftMouse>  <ESC>mb:col<CR>:cc<CR>:let @h=MyListManage('g:MySearchList','g:MySearchListPointer',"back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>'azz
+    map <S-RightMouse> <ESC>mb:cnew<CR>:cc<CR>:let @h=MyListManage('g:MySearchList', 'g:MySearchListPointer',"forward")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>'bzz
 
+    nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-\>g :let @h="<C-R>=expand("<cword>")<CR>"<CR>:call MyListManage('g:MySearchList', 'g:MySearchListPointer',"add", @h)<CR>:cs find g <C-R>h<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
+    nmap <silent> <C-RightMouse> <LeftMouse>ma:let @h ="<C-R>=expand("<cword>")<CR>"<CR>:cs find g <C-R>h<CR>:call MyListManage('g:MySearchList', 'g:MySearchListPointer',"add", @h)<CR>mb:exe '2match MyHighlight2 /' . @h . '/'<CR>
+    nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
+    nmap <C-\>e :let @h="<C-R>=expand("<cword>")<CR>"<CR>:cs find e <C-R>h<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
+    nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
+    nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
+    nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
     
     " Mapping cursor for ctags
     map <A-up>  <ESC>:tp<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
     map <A-down> <ESC>:tn<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
-    map <A-left>  <ESC>:po<CR>:let @h=MySearchManage("back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
-    map <A-right> <ESC>:ta<CR>:let @h=MySearchManage("forward")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
+    map <A-left>  <ESC>:po<CR>:let @h=MyListManage('g:MySearchList', 'g:MySearchListPointer',"back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
+    map <A-right> <ESC>:ta<CR>:let @h=MyListManage('g:MySearchList', 'g:MySearchListPointer',"forward")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
 
     map <S-ScrollWheelUp> <S-Up>
     map <S-ScrollWheelDown> <S-Down>
     map <A-ScrollWheelUp> <A-Up>
     map <A-ScrollWheelDown> <A-Down>
 
-    nmap <silent> <C-LeftMouse> <LeftMouse>:let @h ="<C-R>=expand("<cword>")<CR>"<CR><C-]>:call MySearchManage("add", @h)<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
-    nmap <silent> <C-t> <ESC>:po<CR>:let @h=MySearchManage("back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
+    nmap <silent> <C-LeftMouse> <LeftMouse>:let @h ="<C-R>=expand("<cword>")<CR>"<CR><C-]>:call MyListManage('g:MySearchList', 'g:MySearchListPointer', "add", @h)<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
+    nmap <silent> <C-t> <ESC>:po<CR>:let @h=MyListManage('g:MySearchList', 'g:MySearchListPointer', "back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
 
     set foldmethod=syntax
     set foldlevel=99
@@ -168,7 +177,7 @@ function! MySearch(...)
             let l:result =nr2char(l:result) 
             if ( l:result < 'A' || l:result > 'z' )
                 call feedkeys("\<ESC>:MPL\<CR>\<ESC>:cs f g main\<CR>", "t")
-                call MySearchManage( "add", "main" )
+                call MyListManage('g:MySearchList', 'g:MySearchListPointer', "add", "main" )
             endif
             redraw
             return
@@ -193,7 +202,7 @@ function! MySearch(...)
         redraw
         echo "ltag " . l:s
         execute '2match MyHighlight2 /\c' . @h . '/'
-        call MySearchManage( "add", @h )
+        call MyListManage('g:MySearchList', 'g:MySearchListPointer', "add", @h )
         return
     endif
     if a:1 == 'cscope-f'
@@ -232,7 +241,7 @@ function! MySearch(...)
         endif
         let @h=l:s
         execute '2match MyHighlight2 /\c' . l:s . '/'
-        call MySearchManage( "add", @h )
+        call MyListManage('g:MySearchList', 'g:MySearchListPointer', "add", @h )
         return
     endif
     if a:1 == 'cscope-e'
@@ -271,7 +280,7 @@ function! MySearch(...)
         endif
         let @h=l:s
         execute '2match MyHighlight2 /\c' . l:s . '/'
-        call MySearchManage( "add", @h )
+        call MyListManage('g:MySearchList', 'g:MySearchListPointer', "add", @h )
         return
     endif
 endfunction
@@ -343,30 +352,30 @@ function s:MyCountMatch(...)
     return
 endfunction
 
-function MySearchManage(...)
-    if a:1 == "add"
-        if g:MySearchListPointer >= len( g:MySearchList )
-            call add( g:MySearchList, a:2 )
+function MyListManage(...)
+    if a:3 == "add"
+        if { ''.a:2 } >= len( { ''.a:1 } )
+            call add( { ''.a:1 }, a:4 )
         else
-            let g:MySearchList[ g:MySearchListPointer ] = a:2
+            let { ''.a:1 }[ { ''.a:2 } ] = a:4
         endif
-        let g:MySearchListPointer = g:MySearchListPointer + 1
-    elseif a:1 == "back"
-        if g:MySearchListPointer > 0
-            let g:MySearchListPointer = g:MySearchListPointer - 1
+        let { ''.a:2 } = { ''.a:2 } + 1
+    elseif a:3 == "back"
+        if { ''.a:2 } > 0
+            let { ''.a:2 } = { ''.a:2 } - 1
         endif
-        if g:MySearchListPointer == 0
-            return g:MySearchList[ 0 ]
+        if { ''.a:2 } == 0
+            return { ''.a:1 }[ 0 ]
         endif
-        return g:MySearchList[ g:MySearchListPointer - 1 ]
-    elseif a:1 == "forward"
-        let g:MySearchListPointer = g:MySearchListPointer + 1
-        return g:MySearchList[ g:MySearchListPointer - 1 ]
-    elseif a:1 == "get"
-        if g:MySearchListPointer == 0
-            return g:MySearchList[ 0 ]
+        return { ''.a:1 }[ { ''.a:2 } - 1 ]
+    elseif a:3 == "forward"
+        let { ''.a:1 }[ { ''.a:2 } ] = a:4
+        return { ''.a:1 }[ { ''.a:2 } - 1 ]
+    elseif a:3 == "get"
+        if { ''.a:2 } == 0
+            return { ''.a:1 }[ 0 ]
         endif
-        return g:MySearchList[ g:MySearchListPointer - 1 ]
+        return { ''.a:1 }[ { ''.a:2 } - 1 ]
     endif
 endfunction
 
@@ -423,15 +432,6 @@ command! -nargs=+ CSg :cs f g <args>
 command! -nargs=+ CSt :cs f t <args>
 command! -nargs=+ CSc :cs f c <args>
 
-nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>g :let @h="<C-R>=expand("<cword>")<CR>"<CR>:call MySearchManage("add", @h)<CR>:cs find g <C-R>h<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
-nmap <silent> <C-RightMouse> <LeftMouse>ma:let @h ="<C-R>=expand("<cword>")<CR>"<CR>:cs find g <C-R>h<CR>:call MySearchManage("add", @h)<CR>mb:exe '2match MyHighlight2 /' . @h . '/'<CR>
-nmap <C-\>c :cs find c <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>t :cs find t <C-R>=expand("<cword>")<CR><CR>
-nmap <C-\>e :let @h="<C-R>=expand("<cword>")<CR>"<CR>:cs find e <C-R>h<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
-nmap <C-\>f :cs find f <C-R>=expand("<cfile>")<CR><CR>
-nmap <C-\>i :cs find i ^<C-R>=expand("<cfile>")<CR>$<CR>
-nmap <C-\>d :cs find d <C-R>=expand("<cword>")<CR><CR>
 
 nnoremap <silent> <MiddleMouse> <ESC><LeftMouse>:exe 'echo "2match"<bar>2match MyHighlight2 /\V\<'.escape(expand('<cword>'), '\').'\>/'<cr>
 inoremap <silent> <MiddleMouse> <ESC><LeftMouse>:exe 'echo "2match"<bar>2match MyHighlight2 /\V\<'.escape(expand('<cword>'), '\').'\>/'<cr>
@@ -570,7 +570,7 @@ nmap  <F12> :call MyToggle()<CR>
 nmap  <S-F12> <ESC>:Tlist<CR>
 if has("gui_running")
   " Maximize gvim window.
-  set lines=55 columns=85
+  set lines=58 columns=89
 endif
 
 function! MyToggle(...)
