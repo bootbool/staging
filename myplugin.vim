@@ -7,6 +7,8 @@ command  -nargs=* MyCountMatch call s:MyCountMatch(<f-args>)
 let g:MySearchList = []
 let g:MySearchListPointer = 0
 let g:MyModifyList = []
+let g:MyFileList = []
+let g:MyFileListPointer = 0
 if !exists('g:My_Update_Tags')
     let g:My_Update_Tags = 0
 endif
@@ -106,8 +108,8 @@ function s:MyConfig(...)
     map <S-down> <ESC>:cnext<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
     map <S-left>  <ESC>:col<CR>:cc<CR>:let @h=MyListManage('g:MySearchList', 'g:MySearchListPointer', "back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
     map <S-right> <ESC>:cnew<CR>:cc<CR>:let @h=MyListManage('g:MySearchList', 'g:MySearchListPointer',"forward")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
-    map <S-LeftMouse>  <ESC>mb:col<CR>:cc<CR>:let @h=MyListManage('g:MySearchList','g:MySearchListPointer',"back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>'azz
-    map <S-RightMouse> <ESC>mb:cnew<CR>:cc<CR>:let @h=MyListManage('g:MySearchList', 'g:MySearchListPointer',"forward")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>'bzz
+    map <S-LeftMouse>  <ESC>:col<CR>:cc<CR>:let @h=MyListManage('g:MySearchList','g:MySearchListPointer',"back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>'azz
+    map <S-RightMouse> <ESC>:cnew<CR>:cc<CR>:let @h=MyListManage('g:MySearchList', 'g:MySearchListPointer',"forward")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>'bzz
 
     nmap <C-\>s :cs find s <C-R>=expand("<cword>")<CR><CR>
     nmap <C-\>g :let @h="<C-R>=expand("<cword>")<CR>"<CR>:call MyListManage('g:MySearchList', 'g:MySearchListPointer',"add", @h)<CR>:cs find g <C-R>h<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>
@@ -352,6 +354,7 @@ function s:MyCountMatch(...)
     return
 endfunction
 
+" a:1 Listname a:2 Listpointer
 function MyListManage(...)
     if a:3 == "add"
         if { ''.a:2 } >= len( { ''.a:1 } )
@@ -369,7 +372,7 @@ function MyListManage(...)
         endif
         return { ''.a:1 }[ { ''.a:2 } - 1 ]
     elseif a:3 == "forward"
-        let { ''.a:1 }[ { ''.a:2 } ] = a:4
+        let { ''.a:2 } = { ''.a:2 } + 1
         return { ''.a:1 }[ { ''.a:2 } - 1 ]
     elseif a:3 == "get"
         if { ''.a:2 } == 0
