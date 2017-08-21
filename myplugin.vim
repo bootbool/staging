@@ -131,6 +131,10 @@ function s:MyConfig(...)
     map <S-ScrollWheelDown> <S-Down>
     map <A-ScrollWheelUp> <A-Up>
     map <A-ScrollWheelDown> <A-Down>
+    map <S-MouseDown> <S-up>
+    map <S-MouseUp> <S-Down>
+    map <A-MouseDown> <A-up>
+    map <A-MouseUp> <A-Down>
 
     nmap <silent> <C-LeftMouse> <LeftMouse>:let @h ="<C-R>=expand("<cword>")<CR>"<CR><C-]>:call MyListManage('g:MySearchList', 'g:MySearchListPointer', "add", @h)<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
     nmap <silent> <C-t> <ESC>:po<CR>:let @h=MyListManage('g:MySearchList', 'g:MySearchListPointer', "back")<CR>:exe '2match MyHighlight2 /' . @h . '/'<CR>zz
