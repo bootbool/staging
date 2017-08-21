@@ -368,6 +368,10 @@ function MyListManage(...)
         endif
         return { ''.a:1 }[ { ''.a:2 } - 1 ]
     elseif a:3 == "forward"
+        if { ''.a:2 } >= len({ ''.a:1 })
+           echo 'Reach end!' 
+           return
+        endif
         let { ''.a:2 } = { ''.a:2 } + 1
         return { ''.a:1 }[ { ''.a:2 } - 1 ]
     elseif a:3 == "get"
