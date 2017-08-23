@@ -539,7 +539,7 @@ syntax enable
 syntax on
 
 cd %:p:h
-set path=./**
+set path=**
 if has('unix')
     set backupdir=/tmp
     set directory=/tmp
