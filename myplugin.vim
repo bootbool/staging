@@ -149,13 +149,14 @@ function! MyShourtcut(...)
     echo '2/k: function search, ltag'
     echo '3/l: regular experession, vimgrep'
     let l:result = getchar()
-    if nr2char(l:result) == '1' || nr2char(l:result) == 'j'
+    let c=nr2char(l:result)
+    if c == '1' || c == 'j' || c == 'a'
         redraw
         call MySearch('file')
-    elseif nr2char(l:result) == '2' || nr2char(l:result) == 'k'
+    elseif c == '2' || c == 'k' || c == 's'
         redraw
         call MySearch('tag')
-    elseif nr2char(l:result) == '3' || nr2char(l:result) == 'l'
+    elseif c == '3' || c == 'l' || c == 'd'
         redraw
         call MySearch('vimgrep')
     else
