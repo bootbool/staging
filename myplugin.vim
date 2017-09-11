@@ -561,7 +561,7 @@ highlight MyHighlight3 guibg=DarkCyan guifg=lightgrey term=bold gui=bold,undercu
 
 "set lines=40 columns=70
 
-au VimEnter [Mm]akefile,*.[HhCc],*.[CcHh][px+][px+],*.[CcHh][px+],*.mk,Kconfig call s:MyProjectLoad()
+au VimEnter [Mm]akefile,*.[HhCc],*.[CcHh][px+][px+],*.[CcHh][px+],*.mk,*config* call s:MyProjectLoad()
 autocmd BufWritePost *.[HhCc],*.[CcHh][px+][px+],*.[CcHh][px+] call s:UpdateTags()
 au VimLeave * call s:UpdateTagsLeave()
 autocmd Filetype gitcommit setlocal spell textwidth=72
