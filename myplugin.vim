@@ -247,6 +247,21 @@ function! MySearch(...)
         call MyListManage('g:MySearchList', 'g:MySearchListPointer', "add", @h )
         return
     endif
+    if a:1 == 'cscope-e'
+        if exists("a:2")
+            let l:s = input('cs f e :', a:2)
+        else
+            let l:s = input('cs f e :')
+        endif
+        if l:s == ''
+            echo "Cancel search!"
+            return
+        endif
+        execute 'cs f e ' . l:s
+        let @h=l:s
+        execute '2match MyHighlight2 /\c' . l:s . '/'
+        return
+    endif
     if a:1 == 'cscope-s'
         if exists("a:2")
             let l:s = input('cs f s :', a:2)
