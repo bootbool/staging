@@ -76,7 +76,7 @@ function! s:UpdateTagsLeave()
         endif
         let filelists = join(g:MyModifyList, ' ')
         echo "Updating tags..."
-        silent exe '!ctags --langmap=c:+.c.h.C.H --c-kinds=+p --c++-kinds=+p --fields=+iamS --extra=+q -a ' . filelists
+        silent exe '!ctags  --langmap=c:+.c.h.C.H --c-kinds=+p --c++-kinds=+p --fields=+iamS --extra=+q -a ' . filelists
         redraw
         echo "Updating cscope..."
         silent !cscope -Rbk
@@ -145,9 +145,9 @@ function s:MyConfig(...)
 endfunction
 
 function! MyShourtcut(...)
-    echo '1/j: file search, <tab>'
-    echo '2/k: function search, ltag'
-    echo '3/l: regular experession, vimgrep'
+    echo '1/j/a: file search, <tab>'
+    echo '2/k/s: function search, ltag'
+    echo '3/l/d: regular experession, vimgrep'
     let l:result = getchar()
     let c=nr2char(l:result)
     if c == '1' || c == 'j' || c == 'a'
@@ -247,17 +247,18 @@ function! MySearch(...)
         call MyListManage('g:MySearchList', 'g:MySearchListPointer', "add", @h )
         return
     endif
-    if a:1 == 'cscope-e'
+    if a:1 == 'cscope-s'
         if exists("a:2")
-            let l:s = input('cs f e :', a:2)
+            let l:s = input('cs f s :', a:2)
         else
-            let l:s = input('cs f e :')
+            let l:s = input('cs f s :')
         endif
         if l:s == ''
             echo "Cancel search!"
             return
         endif
-        execute 'cs f e ' . l:s
+        let l:s = substitute(l:s, " ", ".*", "g")
+        execute 'cs f s ' . l:s
         let @h=l:s
         execute '2match MyHighlight2 /\c' . l:s . '/'
         return
@@ -434,11 +435,12 @@ nnoremap <leader>P "0P
 map K :call MyShourtcut()<CR>
 nmap gdd :let @/='\<'.expand("<cword>").'\>'<CR>:set hls<CR>:echo @/<CR>
 
-command! -nargs=+ CSf :cs f f <args>
-command! -nargs=+ CSe :cs f e <args>
-command! -nargs=+ CSg :cs f g <args>
-command! -nargs=+ CSt :cs f t <args>
-command! -nargs=+ CSc :cs f c <args>
+command! -nargs=+ CSF :cs f f <args>
+command! -nargs=+ CSE :cs f e <args>
+command! -nargs=+ CSG :cs f g <args>
+command! -nargs=+ CST :cs f t <args>
+command! -nargs=+ CSC :cs f c <args>
+command! -nargs=+ CSS :cs f s <args>
 
 
 nnoremap <silent> <MiddleMouse> <ESC><LeftMouse>:exe 'echo "2match"<bar>2match MyHighlight2 /\V\<'.escape(expand('<cword>'), '\').'\>/'<cr>
@@ -472,19 +474,19 @@ nmap <S-F2> :call SwitchSourceHeader()<CR>
 nmap <C-F2> <ESC>:call MySearch('cscope-f')<CR>
 vmap <C-F2> <ESC>:call MySearch('cscope-f', '<C-R>*')<CR>
 
-nmap #3 <ESC>:call MySearch('tag')<CR>
-vmap #3 <ESC>:call MySearch('tag', '<C-R>*')<CR>
-nmap <C-F3> <ESC>:call MySearch('cscope-g')<CR>
-nmap <S-F3> <ESC>:call MySearch('cscope-g')<CR>
-vmap <C-F3> <ESC>:call MySearch('cscope-g', '<C-R>*')<CR>
-vmap <S-F3> <ESC>:call MySearch('cscope-g', '<C-R>*')<CR>
+nmap #3 <ESC>:call MySearch('cscope-g')<CR>
+vmap #3 <ESC>:call MySearch('cscope-g', '<C-R>*')<CR>
+nmap <C-F3> <ESC>:call MySearch('tag')<CR>
+nmap <S-F3> <ESC>:call MySearch('tag')<CR>
+vmap <C-F3> <ESC>:call MySearch('tag', '<C-R>*')<CR>
+vmap <S-F3> <ESC>:call MySearch('tag', '<C-R>*')<CR>
 
-nmap #4 <ESC>:call MySearch('vimgrep')<CR>
-vmap #4 <ESC>:call MySearch('vimgrep', '<C-R>*')<CR>
-nmap <C-F4> <ESC>:call MySearch('cscope-e')<CR>
-nmap <S-F4> <ESC>:call MySearch('cscope-e')<CR>
-vmap <C-F4> <ESC>:call MySearch('cscope-e', '<C-R>*')<CR>
-vmap <S-F4> <ESC>:call MySearch('cscope-e', '<C-R>*')<CR>
+nmap #4 <ESC>:call MySearch('cscope-s')<CR>
+vmap #4 <ESC>:call MySearch('cscope-s', '<C-R>*')<CR>
+nmap <C-F4> <ESC>:call MySearch('vimgrep')<CR>
+nmap <S-F4> <ESC>:call MySearch('vimgrep')<CR>
+vmap <C-F4> <ESC>:call MySearch('vimgrep', '<C-R>*')<CR>
+vmap <S-F4> <ESC>:call MySearch('vimgrep', '<C-R>*')<CR>
 
 map #5 <ESC>:call MyHighlight('1')<CR>
 nmap <S-F5> <ESC>:call MyHighlight('2')<CR>
