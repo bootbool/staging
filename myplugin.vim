@@ -195,22 +195,19 @@ function! MySearch(...)
     endif
     if a:1 == 'tag'
         if exists("a:2")
-            let l:s = '/' . input('ltag /', a:2)
+            let l:s = input('ltag /', a:2)
         else
-            let l:s = '/' . input('ltag /')
+            let l:s = input('ltag /')
         endif
         if l:s == '' || l:s == '/'
             echo "Cancel search!"
             return
         endif
         let l:s = substitute(l:s, " ", ".*", "g")
-        let @h = substitute(l:s, "/", "", "")
-        execute 'ltag ' . l:s
+        execute 'ltag /' . l:s
         redraw
-        echo "ltag " . l:s
-        execute '2match MyHighlight2 /\c' . @h . '/'
+        echo "ltag /" . l:s
         call MyListManage('g:MySearchList', 'g:MySearchListPointer', "add", @h )
-        return
     endif
     if a:1 == 'cscope-f'
         if exists("a:2")
@@ -242,25 +239,7 @@ function! MySearch(...)
         endif
         let l:s = substitute(l:s, " ", ".*", "g")
         execute 'cs f g ' . l:s
-        let @h=l:s
-        execute '2match MyHighlight2 /\c' . l:s . '/'
         call MyListManage('g:MySearchList', 'g:MySearchListPointer', "add", @h )
-        return
-    endif
-    if a:1 == 'cscope-e'
-        if exists("a:2")
-            let l:s = input('cs f e :', a:2)
-        else
-            let l:s = input('cs f e :')
-        endif
-        if l:s == ''
-            echo "Cancel search!"
-            return
-        endif
-        execute 'cs f e ' . l:s
-        let @h=l:s
-        execute '2match MyHighlight2 /\c' . l:s . '/'
-        return
     endif
     if a:1 == 'cscope-s'
         if exists("a:2")
@@ -274,9 +253,6 @@ function! MySearch(...)
         endif
         let l:s = substitute(l:s, " ", ".*", "g")
         execute 'cs f s ' . l:s
-        let @h=l:s
-        execute '2match MyHighlight2 /\c' . l:s . '/'
-        return
     endif
     if a:1 == 'vimgrep'
         if exists("a:2")
@@ -297,12 +273,12 @@ function! MySearch(...)
         if glob('**/*.[CcHh][px+]') != ''
             execute 'vimgrepadd /' . l:s . '/g **/*.[CcHh][px+]'
         endif
-        let @h=l:s
-        execute '2match MyHighlight2 /\c' . l:s . '/'
         call MyListManage('g:MySearchList', 'g:MySearchListPointer', "add", @h )
-        return
     endif
+    let @h = substitute(l:s, '\.\*', '\\w*', "g")
+    execute '2match MyHighlight2 /\c' . @h . '/'
 endfunction
+
 
 function! MyHighlight(...)
     if a:0 == 0
