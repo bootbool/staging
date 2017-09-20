@@ -277,6 +277,7 @@ function! MySearch(...)
     endif
     let @h = substitute(l:s, '\.\*', '\\w*', "g")
     execute '2match MyHighlight2 /\c' . @h . '/'
+    execute 'cw'
 endfunction
 
 
