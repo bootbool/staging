@@ -207,7 +207,6 @@ function! MySearch(...)
         execute 'ltag /' . l:s
         redraw
         echo "ltag /" . l:s
-        call MyListManage('g:MySearchList', 'g:MySearchListPointer', "add", @h )
     endif
     if a:1 == 'cscope-f'
         if exists("a:2")
@@ -239,7 +238,6 @@ function! MySearch(...)
         endif
         let l:s = substitute(l:s, " ", ".*", "g")
         execute 'cs f g ' . l:s
-        call MyListManage('g:MySearchList', 'g:MySearchListPointer', "add", @h )
     endif
     if a:1 == 'cscope-s'
         if exists("a:2")
@@ -273,13 +271,12 @@ function! MySearch(...)
         if glob('**/*.[CcHh][px+]') != ''
             execute 'vimgrepadd /' . l:s . '/g **/*.[CcHh][px+]'
         endif
-        call MyListManage('g:MySearchList', 'g:MySearchListPointer', "add", @h )
     endif
     let @h = substitute(l:s, '\.\*', '\\w*', "g")
-    execute '2match MyHighlight2 /\c' . @h . '/'
+    call MyListManage('g:MySearchList', 'g:MySearchListPointer', "add", @h )
     execute 'cw'
+    execute '2match MyHighlight2 /\c' . @h . '/'
 endfunction
-
 
 function! MyHighlight(...)
     if a:0 == 0
