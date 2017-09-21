@@ -274,7 +274,7 @@ function! MySearch(...)
     endif
     let @h = substitute(l:s, '\.\*', '\\w*', "g")
     call MyListManage('g:MySearchList', 'g:MySearchListPointer', "add", @h )
-    execute 'cw'
+    execute 'cw|cc'
     execute '2match MyHighlight2 /\c' . @h . '/'
 endfunction
 
