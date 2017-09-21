@@ -435,9 +435,9 @@ command! -nargs=+ CSC :cs f c <args>
 command! -nargs=+ CSS :cs f s <args>
 
 
-nnoremap <silent> <MiddleMouse> <ESC><LeftMouse>:exe 'echo "2match"<bar>2match MyHighlight2 /\V\<'.escape(expand('<cword>'), '\').'\>/'<cr>
-inoremap <silent> <MiddleMouse> <ESC><LeftMouse>:exe 'echo "2match"<bar>2match MyHighlight2 /\V\<'.escape(expand('<cword>'), '\').'\>/'<cr>
-vnoremap <silent> <MiddleMouse> <ESC><LeftMouse>:exe 'echo "2match"<bar>2match MyHighlight2 /\V'.escape("<C-R>*", '\').'/'<cr>
+nnoremap <silent> <MiddleMouse> <ESC><LeftMouse>:exe 'echo "match"<bar>match MyHighlight1 /\V\<'.escape(expand('<cword>'), '\').'\>/'<cr>
+inoremap <silent> <MiddleMouse> <ESC><LeftMouse>:exe 'echo "match"<bar>match MyHighlight1 /\V\<'.escape(expand('<cword>'), '\').'\>/'<cr>
+vnoremap <silent> <MiddleMouse> <ESC><LeftMouse>:exe 'echo "match"<bar>match MyHighlight1 /\V'.escape("<C-R>*", '\').'/'<cr>
 map <2-MiddleMouse> mA
 imap <2-MiddleMouse> <ESC>mA
 map <3-MiddleMouse> <Nop>
@@ -549,7 +549,7 @@ endif
 
 colorscheme koehler
 hi Visual  guifg=#000000 guibg=#FFFFFF gui=none
-highlight MyHighlight1 guibg=green guifg=yellow term=bold gui=bold,undercurl
+highlight MyHighlight1 guibg=green guifg=black term=bold gui=bold,undercurl
 highlight MyHighlight2 guibg=blue guifg=white term=bold gui=bold,undercurl
 highlight MyHighlight3 guibg=DarkCyan guifg=lightgrey term=bold gui=bold,undercurl
 
