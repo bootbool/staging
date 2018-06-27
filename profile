@@ -16,7 +16,11 @@ export UNZIP="-O gb18030"
 export ZIPINFO="-O gb18030"
 
 export PATH=$PATH:/opt/gcc/bin
-
+alias go=/usr/local/go/bin/go
+export GOROOT=/usr/local/go
+export GOBIN=$GOROOT/bin
+export PATH=$PATH:$GOBIN
+export GOPATH=$HOME/gopath
 if [ `pwd` = $HOME ]; 
 then
     cd $RAMDISK 
