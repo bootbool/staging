@@ -274,7 +274,9 @@ function! MySearch(...)
     endif
     let @h = substitute(l:s, '\.\*', '\\w*', "g")
     call MyListManage('g:MySearchList', 'g:MySearchListPointer', "add", @h )
-    execute 'cw|cc'
+    if a:1 != 'tag'
+        execute 'cw|cc'
+    endif
     execute '2match MyHighlight2 /\c' . @h . '/'
 endfunction
 
@@ -559,7 +561,8 @@ autocmd Filetype gitcommit setlocal spell textwidth=72
 
 " GUI setting
 "Toggle Menu and Toolbar
-set guifont=Monospace\ 11
+"set guifont=Monospace\ 11
+set guifont=Consolas:h11
 set guioptions+=c
 set guioptions-=m
 set guioptions-=T
