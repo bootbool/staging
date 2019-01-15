@@ -7,6 +7,7 @@ export HISTFILESIZE=10000
 export HISTSIZE=2000
 PS1='`basename \w`\$ '
 export RAMDISK="/mnt/RAMDISK"
+export ramdisk="/mnt/ramdisk"
 
 # java setup
 export JAVA_HOME=/opt/java/jdk
