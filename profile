@@ -20,7 +20,7 @@ alias go=/usr/local/go/bin/go
 export GOROOT=/usr/local/go
 export GOBIN=$GOROOT/bin
 export PATH=$PATH:$GOBIN
-export GOPATH=$HOME/gopath
+export GOPATH=$HOME/gopath:~/Desktop/work
 if [ `pwd` = $HOME ]; 
 then
     cd $RAMDISK 
