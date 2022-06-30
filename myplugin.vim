@@ -1,9 +1,9 @@
-command  -nargs=* MyProject call s:MyProject(<f-args>)
-command  -nargs=* MyProjectLoad call s:MyProjectLoad(<f-args>)
-command  -nargs=* MyConfig call s:MyConfig(<f-args>)
-command  -nargs=* MPL call s:MyProjectLoad(<f-args>)
-command  -nargs=* MPC call s:MyProjectCreat(<f-args>)
-command  -nargs=* MyCountMatch call s:MyCountMatch(<f-args>)
+command!  -nargs=* MyProject call s:MyProject(<f-args>)
+command!  -nargs=* MyProjectLoad call s:MyProjectLoad(<f-args>)
+command!  -nargs=* MyConfig call s:MyConfig(<f-args>)
+command!  -nargs=* MPL call s:MyProjectLoad(<f-args>)
+command!  -nargs=* MPC call s:MyProjectCreat(<f-args>)
+command!  -nargs=* MyCountMatch call s:MyCountMatch(<f-args>)
 let g:MySearchList = []
 let g:MySearchListPointer = 0
 let g:MyModifyList = []
@@ -348,7 +348,7 @@ function s:MyCountMatch(...)
 endfunction
 
 " a:1 Listname a:2 Listpointer
-function MyListManage(...)
+function! MyListManage(...)
     if a:3 == "add"
         if { ''.a:2 } >= len( { ''.a:1 } )
             call add( { ''.a:1 }, a:4 )
@@ -505,6 +505,7 @@ map <F10> <ESC>:silent make!<CR><ESC>:copen<CR> /error: <CR>
 "Plugins setting
 let Tlist_Use_Right_Window = 1
 
+set backspace=2
 set fileformat=unix
 set autoindent
 set tabstop=4
@@ -562,7 +563,7 @@ autocmd Filetype gitcommit setlocal spell textwidth=72
 " GUI setting
 "Toggle Menu and Toolbar
 "set guifont=Monospace\ 11
-set guifont=Consolas:h11
+"set guifont=Consolas:h11
 set guioptions+=c
 set guioptions-=m
 set guioptions-=T
