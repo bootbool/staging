@@ -505,6 +505,8 @@ map <F10> <ESC>:silent make!<CR><ESC>:copen<CR> /error: <CR>
 "Plugins setting
 let Tlist_Use_Right_Window = 1
 
+"set laststatus=2
+:set statusline=%F%m%r\ [POS=%04l,%04v][%p%%]\ [LEN=%L]
 set backspace=2
 set fileformat=unix
 set autoindent
