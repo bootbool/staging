@@ -1,3 +1,8 @@
+if exists("g:My_Vimrc")
+    finish
+endif
+let g:My_Vimrc = 1
+
 command!  -nargs=* MyProject call s:MyProject(<f-args>)
 command!  -nargs=* MyProjectLoad call s:MyProjectLoad(<f-args>)
 command!  -nargs=* MyConfig call s:MyConfig(<f-args>)
