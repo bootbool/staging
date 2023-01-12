@@ -556,9 +556,10 @@ endif
 
 colorscheme koehler
 hi Visual  guifg=#000000 guibg=#FFFFFF gui=none
-highlight MyHighlight1 guibg=green guifg=black term=bold gui=bold,undercurl
-highlight MyHighlight2 guibg=blue guifg=white term=bold gui=bold,undercurl
-highlight MyHighlight3 guibg=DarkCyan guifg=lightgrey term=bold gui=bold,undercurl
+
+highlight MyHighlight1 guibg=green guifg=black ctermbg=green ctermfg=black term=bold gui=bold,undercurl
+highlight MyHighlight2 guibg=blue guifg=white ctermbg=blue ctermfg=white  term=bold gui=bold,undercurl
+highlight MyHighlight3 guibg=DarkCyan guifg=lightgrey ctermbg=DarkCyan ctermfg=lightgrey term=bold gui=bold,undercurl
 
 "set lines=40 columns=70
 
